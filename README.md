@@ -1,2 +1,1 @@
-# to-do-app
-To-do Application
+# To-do Application
