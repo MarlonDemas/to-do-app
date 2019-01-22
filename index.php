@@ -5,14 +5,23 @@
     // Connect to database
     $db = mysqli_connect("localhost", "root", "", "db_tasks");
 
+    // Test Connection
+    if (mysqli_connect_errno()) {
+        // Connection Failed
+        echo mysqli_connect_errno();
+    } 
+    else {
+        echo "Connection Successful";
+    }
+
     // Insert a quote if submit button is clicked
     if (isset($_POST['submit'])) {
         if (empty($_POST['task'])) {
             $errors = "You must fill in the task";
         } else {
             $task = $_POST['task'];
-            $sql_insert = "INSERT INTO tasks VALUES ('$task')";
-            mysqli_query($db,$sql);
+            $sql_insert = "INSERT INTO tasks (task) VALUES ('$task')";
+            mysqli_query($db,$sql_insert);
             header('Location: '. $_SERVER['PHP_SELF']);
         }
         
@@ -52,5 +61,30 @@
             </div>
             <button type="submit" class="button is-info" name="submit">Submit</button>
         </form>
+        <table class="table is-bordered">
+            <thead>
+                <tr>
+                    <th>N</th>
+                    <th>Tasks</th>
+                    <th style="width: 60px;">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php 
+                // select all tasks if page is visited or refreshed
+                $tasks = mysqli_query($db, "SELECT * FROM tasks");
+
+                $i = 1; while ($row = mysqli_fetch_array($tasks)) { ?>
+                    <tr>
+                        <td> <?php echo $i; ?> </td>
+                        <td class="task"> <?php echo $row['task']; ?> </td>
+                        <td class="delete"> 
+                            <a href="index.php?del_task=<?php echo $row['id'] ?>">x</a> 
+                        </td>
+                    </tr>
+                <?php $i++; } ?>	
+            </tbody>
+        </table>
     </body>
 </html>
