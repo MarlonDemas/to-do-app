@@ -83,3 +83,11 @@
 tr {
     height: 8vh;
 }
+
+.field.is-grouped {
+    justify-content: center;
+}
+
+a {
+    color: black;
+}

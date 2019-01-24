@@ -16,8 +16,14 @@
             $sql_insert = "INSERT INTO tasks (task, myDate, myTime) VALUES ('$task', '$date', '$time')";
             mysqli_query($db, $sql_insert);
             header('Location: '. $_SERVER['PHP_SELF']);
-        }
-        
+        }       
+    }
+    // delete task
+    if (isset($_GET['del_task'])) {
+        $id = $_GET['del_task'];
+
+        mysqli_query($db, "DELETE FROM tasks WHERE id=".$id);
+        header('Location:'. $_SERVER['PHP_SELF']);
     }
 ?>
 
@@ -63,7 +69,7 @@
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
-                            <td>Task</td>
+                            <td>Task to be completed</td>
                             <td>Date</td>
                             <td>Time</td>
                             <td>Date Added</td>
@@ -82,7 +88,11 @@
                             <td> <?php echo $row['myDate']; ?> </td>
                             <td> <?php echo $row['myTime']; ?> </td>
                             <td> <?php echo $row['date_created']; ?> </td>
-                            <td><span class="icon hvr-icon-wobble-horizontal"><i class="fas fa-2x fa-trash-alt hvr-icon"></i></span></td>
+                            <td>
+                                <a href="index.php?del_task=<?php echo $row['id'] ?>">
+                                    <span class="icon hvr-icon-wobble-horizontal"><i class="fas fa-2x fa-trash-alt hvr-icon"></i></span>
+                                </a>
+                            </td>
                         </tr>
                     <?php $i++; } ?>
                     </tbody>
