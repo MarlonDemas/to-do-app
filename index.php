@@ -65,7 +65,7 @@
                             <td>Task</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>Date Created</td>
+                            <td>Date Added</td>
                         </tr>
                     </thead>
                     <tbody>
