@@ -3,16 +3,7 @@
     $errors = '';
 
     // Connect to database
-    $db = mysqli_connect("localhost", "root", "", "db_tasks");
-
-    // Test Connection
-    if (mysqli_connect_errno()) {
-        // Connection Failed
-        echo mysqli_connect_errno();
-    } 
-    else {
-        echo "Connection Successful";
-    }
+    $db = mysqli_connect("localhost", "root", "", "db_todo");
 
     // Insert a quote if submit button is clicked
     if (isset($_POST['submit'])) {
@@ -20,13 +11,14 @@
             $errors = "You must fill in the task";
         } else {
             $task = $_POST['task'];
-            $sql_insert = "INSERT INTO tasks (task) VALUES ('$task')";
-            mysqli_query($db,$sql_insert);
+            $date = $_POST['myDate'];
+            $time = $_POST['myTime'];
+            $sql_insert = "INSERT INTO tasks (task, myDate, myTime) VALUES ('$task', '$date', '$time')";
+            mysqli_query($db, $sql_insert);
             header('Location: '. $_SERVER['PHP_SELF']);
         }
         
     }
-    
 ?>
 
 <!DOCTYPE html>
@@ -41,50 +33,58 @@
     <body>
         <h1 class="title is-1 has-text-centered">To-do Application</h1>
         <hr>
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" class="form" method="post">
-            <?php if(isset($errors)) { ?>
-                <p> <?php echo $errors; ?></p>
-            <?php } ?>
-            <div class="field is-grouped">
-                <label class="label">Task name:</label>
-                <div class="control">
-                    <input type="text" name="task" class="input">
-                </div>
-                <label class="label">Due Date:</label>
-                <div class="control">
-                    <input type="date" name="date" class="input">
-                </div>
-                <label class="label">Time:</label>
-                <div class="control">
-                    <input type="time" name="time" class="input">
-                </div>
+        <section class="section">
+            <div class="container">
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" class="form" method="post">
+                    <?php if(isset($errors)) { ?>
+                        <p> <?php echo $errors; ?></p>
+                    <?php } ?>
+                    <div class="field is-grouped">
+                        <label class="label">Task name:</label>
+                        <div class="control">
+                            <input type="text" name="task" class="input">
+                        </div>
+                        <label class="label">Due Date:</label>
+                        <div class="control">
+                            <input type="date" name="myDate" class="input">
+                        </div>
+                        <label class="label">Time:</label>
+                        <div class="control">
+                            <input type="time" name="myTime" class="input">
+                        </div>
+                        <button type="submit" class="button is-info" name="submit">Add Task</button>
+                    </div>
+                </form>
             </div>
-            <button type="submit" class="button is-info" name="submit">Submit</button>
-        </form>
-        <table class="table is-bordered">
-            <thead>
-                <tr>
-                    <th>N</th>
-                    <th>Tasks</th>
-                    <th style="width: 60px;">Action</th>
-                </tr>
-            </thead>
+        </section>
+        <section class="section">
+            <div class="container">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <td>Task</td>
+                            <td>Date</td>
+                            <td>Time</td>
+                            <td>Date Created</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
 
-            <tbody>
-                <?php 
-                // select all tasks if page is visited or refreshed
-                $tasks = mysqli_query($db, "SELECT * FROM tasks");
+                    $tasks = mysqli_query($db, "SELECT * FROM tasks");
 
-                $i = 1; while ($row = mysqli_fetch_array($tasks)) { ?>
-                    <tr>
-                        <td> <?php echo $i; ?> </td>
-                        <td class="task"> <?php echo $row['task']; ?> </td>
-                        <td class="delete"> 
-                            <a href="index.php?del_task=<?php echo $row['id'] ?>">x</a> 
-                        </td>
-                    </tr>
-                <?php $i++; } ?>	
-            </tbody>
-        </table>
+                    $i = 1;
+                    while ($row = mysqli_fetch_array($tasks)) {?>
+                        <tr>
+                            <td> <?php echo $row['task']; ?> </td>
+                            <td> <?php echo $row['myDate']; ?> </td>
+                            <td> <?php echo $row['myTime']; ?> </td>
+                            <td> <?php echo $row['date_created']; ?> </td>
+                        </tr>
+                    <?php $i++; } ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </body>
 </html>
