@@ -79,7 +79,7 @@
                     <tbody>
                     <?php
 
-                    $tasks = mysqli_query($db, "SELECT * FROM tasks");
+                    $tasks = mysqli_query($db, "SELECT * FROM tasks ORDER BY task");
 
                     $i = 1;
                     while ($row = mysqli_fetch_array($tasks)) {?>
