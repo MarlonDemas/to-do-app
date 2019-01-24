@@ -29,6 +29,7 @@
         <title>To-do Application</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="hover.css">
     </head>
     <body>
         <h1 class="title is-1 has-text-centered">To-do Application</h1>
@@ -66,6 +67,7 @@
                             <td>Date</td>
                             <td>Time</td>
                             <td>Date Added</td>
+                            <td>Delete</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +82,7 @@
                             <td> <?php echo $row['myDate']; ?> </td>
                             <td> <?php echo $row['myTime']; ?> </td>
                             <td> <?php echo $row['date_created']; ?> </td>
+                            <td><span class="icon hvr-icon-wobble-horizontal"><i class="fas fa-2x fa-trash-alt hvr-icon"></i></span></td>
                         </tr>
                     <?php $i++; } ?>
                     </tbody>
