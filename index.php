@@ -3,7 +3,7 @@
     $errors = '';
 
     // Connect to database
-    $db = mysqli_connect("", "root", "", "db_todo");
+    $db = mysqli_connect("https://to-do-list-ap.herokuapp.com/index.php", "root", "", "db_todo");
 
     // Insert a quote if submit button is clicked
     if (isset($_POST['submit'])) {
