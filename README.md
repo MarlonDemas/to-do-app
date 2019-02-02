@@ -29,7 +29,7 @@ Made this application to challenge my knowledge of using php with mysql.
 
 3. Cd into the folder then copy the path.
 
-4. Create a virtual host using wamp, lamp or mamp with the name of your choosing and paste the path to create your virtual host.
+4. Create a virtual host using **<a href="https://sourceforge.net/projects/wampserver/">Wamp</a>**, **<a href="https://bitnami.com/stack/lamp/installer">Lamp</a>** or **<a href="https://www.apachefriends.org/download.html">Xamp</a>** with the name of your choosing and paste the path to create your virtual host.
 
 5. Refresh wamp and then open the virtual host and then you can do the quiz and see how much you know.
 
